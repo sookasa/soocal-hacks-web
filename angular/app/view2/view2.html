@@ -2,16 +2,16 @@
     <md-card flex="50" layout-align="center center">
         <h3>Hi {{ctrl.user.email}}!</h3>
         <md-list>
-            <md-list-item ng-repeat="item in ctrl.choices">
+            <md-list-item flex="10" ng-repeat="item in ctrl.choices">
                 <img ng-src="{{item.picture}}" class="md-avatar" alt="{{item.name}}"/>
 
-                <div class="md-list-item-text" layout="column">
+                <div class="md-list-item-text" flex="80" layout="column">
                     <h3>{{ item.name }}</h3>
                     <md-chips ng-model="item.tags" readonly="true">
                     </md-chips>
                     <p>{{ item.yelp }}</p>
                 </div>
-                <md-checkbox class="md-secondary" ng-model="topping.choice"></md-checkbox>
+                <md-checkbox flex="10" class="md-secondary" ng-model="topping.choice"></md-checkbox>
             </md-list-item>
         </md-list>
         <div class="md-actions" layout="row" layout-align="center center">
