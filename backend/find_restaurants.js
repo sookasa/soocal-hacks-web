@@ -15,7 +15,7 @@ exports.handler = function(event, context) {
     secret: 'WIY2ti50EgzqnlUsyEXze-6VD-Y'
   };
   var request_data = {
-    url: 'https://api.yelp.com/v2/search?term=yelp&location=sf&limit=1',
+    url: 'https://api.yelp.com/v2/search/?term=Restaurants&location=906 S Claremont St, San Mateo, CA&limit=20&radius_filter=1500',
     method: 'GET'
   };
   request({
