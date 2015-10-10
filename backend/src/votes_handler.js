@@ -1,11 +1,5 @@
 var async = require('async');
 
-function votes_handler_add_vote(vote_choice) {
-    addVote(date, vote_choice.id, email, vote_choice.choice, function(err, result) {
-        votes_handler_add_vote()
-    });
-}
-
 exports.votes_handler = function(event, context) {
     console.log('Votes Handler - Received Event:', JSON.stringify(event, null, 2));
 
