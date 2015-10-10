@@ -10,7 +10,7 @@ angular.module('myApp.services', []).
             this.choices = [
                 {
                     name: 'Pacific Catch',
-                    tags: ['asian'],
+                    tags: ['asian', 'asian', 'asian', 'asian', 'asian', 'asian'],
                     picture: 'https://material.angularjs.org/0.11.2/img/icons/angular-logo.svg',
                     yelp: 'http://www.yelp.com/pacific-catch'
                 },

@@ -20,7 +20,7 @@ angular.module('myApp.view2', ['ngRoute'])
         this.choices = [
             {
                 name: 'Pacific Catch',
-                tags: ['asian'],
+                tags: ['asian', 'asdd', 'adsad', 'adsdas', 'asian1', 'as2ian', '3asian', 'a4sian'],
                 picture: 'https://material.angularjs.org/0.11.2/img/icons/angular-logo.svg',
                 yelp: 'http://www.yelp.com/pacific-catch'
             },

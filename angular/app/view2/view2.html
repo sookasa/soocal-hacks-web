@@ -1,20 +1,21 @@
-<md-card layout-align="center center">
-    Hi {{ctrl.user.email}}!
-    <md-list>
-        <md-list-item class="md-3-line" ng-repeat="item in ctrl.choices">
-            <img ng-src="{{item.picture}}" class="md-avatar" alt="{{item.name}}"/>
+<md-content layout="row" flex class="md-padding" layout-align="center center">
+    <md-card flex="50" layout-align="center center">
+        <h3>Hi {{ctrl.user.email}}!</h3>
+        <md-list>
+            <md-list-item ng-repeat="item in ctrl.choices">
+                <img ng-src="{{item.picture}}" class="md-avatar" alt="{{item.name}}"/>
 
-            <div class="md-list-item-text" layout="column">
-                <h3>{{ item.name }}</h3>
-                <md-chips ng-repeat="tag in item.tags">
-                    <md-chip>{{tag}}</md-chip>
-                </md-chips>
-                <p>{{ item.yelp }}</p>
-            </div>
-            <md-checkbox class="md-secondary" ng-model="topping.choice"></md-checkbox>
-        </md-list-item>
-    </md-list>
-    <div class="md-actions" layout="row" layout-align="center center">
-        <md-button class="md-raised md-primary" ng-click="ctrl.vote()">vote</md-button>
-    </div>
-</md-card>
+                <div class="md-list-item-text" layout="column">
+                    <h3>{{ item.name }}</h3>
+                    <md-chips ng-model="item.tags" readonly="true">
+                    </md-chips>
+                    <p>{{ item.yelp }}</p>
+                </div>
+                <md-checkbox class="md-secondary" ng-model="topping.choice"></md-checkbox>
+            </md-list-item>
+        </md-list>
+        <div class="md-actions" layout="row" layout-align="center center">
+            <md-button class="md-raised md-primary" ng-click="ctrl.vote()">vote</md-button>
+        </div>
+    </md-card>
+</md-content>
