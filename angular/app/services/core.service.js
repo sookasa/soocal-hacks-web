@@ -9,7 +9,7 @@ angular.module('myApp.services', []).
                 {
                     id: 0,
                     name: 'Pacific Catch',
-                    tags: ['asian', 'asian', 'asian', 'asian', 'asian', 'asian'],
+                    tags: ['asian', 'asian1', 'asian2', 'asian3', 'asian4', 'coke'],
                     picture: 'https://material.angularjs.org/0.11.2/img/icons/angular-logo.svg',
                     yelp: 'http://www.yelp.com/pacific-catch'
                 },
@@ -40,6 +40,20 @@ angular.module('myApp.services', []).
             console.log(myChoices);
         };
 
+        var getResultFromServer = function () {
+            // get result from server api
+            var result = [
+                {
+                    id: 0,
+                    name: 'Pacific Catch',
+                    tags: ['asian', 'asian1', 'asian2', 'asian3', 'asian4', 'coke'],
+                    picture: 'https://material.angularjs.org/0.11.2/img/icons/angular-logo.svg',
+                    yelp: 'http://www.yelp.com/pacific-catch'
+                }
+            ];
+            return result;
+        };
+
         return {
             setUser: function (user1) {
                 this.user = user1;
@@ -59,6 +73,10 @@ angular.module('myApp.services', []).
                     myChoices.push({id: choice_i.id, choice: choice_i.choice});
                 });
                 submitVote(myChoices);
+            },
+
+            getResult: function () {
+                return getResultFromServer();
             }
         }
 

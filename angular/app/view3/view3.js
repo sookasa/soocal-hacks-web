@@ -15,4 +15,5 @@ angular.module('myApp.view3', ['ngRoute'])
         if (!this.user) {
             $location.path('/view1');
         }
+        this.result = coreService.getResult();
     }]);
