@@ -5,17 +5,18 @@ angular.module('myApp.view2', ['ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/view2', {
             templateUrl: 'view2/view2.html',
-            controller: 'View2Ctrl'
+            controller: 'View2Ctrl',
+            controllerAs: 'ctrl'
         });
     }])
 
-    .controller('View2Ctrl', ['$scope', '$location', 'coreService', function ($scope, $location, coreService) {
-        $scope.user = coreService.getUser();
-        if (!$scope.user) {
+    .controller('View2Ctrl', ['$location', 'coreService', function ($location, coreService) {
+        this.user = coreService.getUser();
+        if (!this.user) {
             console.log('wrong virw');
             $location.path('/view1');
         }
-        $scope.choices = [
+        this.choices = [
             {
                 name: 'Pacific Catch',
                 tags: ['asian'],
@@ -36,6 +37,6 @@ angular.module('myApp.view2', ['ngRoute'])
             }
         ];
         //console.log('user.email=' + user.email);
-        //$scope.user = coreService.getUser();
+        //this.user = coreService.getUser();
 
     }]);

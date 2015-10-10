@@ -1,7 +1,7 @@
 <md-card layout-align="center center">
-    Hi {{user.email}}!
+    Hi {{ctrl.user.email}}!
     <md-list>
-        <md-list-item class="md-3-line" ng-repeat="item in choices">
+        <md-list-item class="md-3-line" ng-repeat="item in ctrl.choices">
             <img ng-src="{{item.picture}}" class="md-avatar" alt="{{item.name}}" />
             <div class="md-list-item-text" layout="column">
                 <h3>{{ item.name }}</h3>
@@ -12,6 +12,6 @@
         </md-list-item>
     </md-list>
     <div class="md-actions" layout="row" layout-align="center center">
-        <md-button class="md-raised md-primary" ng-click="vote()">vote</md-button>
+        <md-button class="md-raised md-primary" ng-click="ctrl.vote()">vote</md-button>
     </div>
 </md-card>
