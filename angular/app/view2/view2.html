@@ -1,3 +1,13 @@
 <md-card layout-align="center center">
-        Hi {{user.email}}!
-    </md-card>
+    Hi {{user.email}}!
+    <md-list>
+        <md-list-item class="md-3-line" ng-repeat="item in options">
+            <img ng-src="{{item.picture}}" class="md-avatar" alt="{{item.name}}" />
+            <div class="md-list-item-text" layout="column">
+                <h3>{{ item.name }}</h3>
+                <h4>{{ item.tags }}</h4>
+                <p>{{ item.yelp }}</p>
+            </div>
+        </md-list-item>
+    </md-list>
+</md-card>
