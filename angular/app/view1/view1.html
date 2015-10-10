@@ -1,0 +1,13 @@
+<md-content layout="column" flex class="md-padding">
+    <md-card layout-align="center center">
+        <md-card-content>
+            <md-input-container flex>
+                <label>Email</label>
+                <input ng-model="user.email" required>
+            </md-input-container>
+        </md-card-content>
+        <div class="md-actions" layout="row" layout-align="end center">
+            <md-button class="md-raised md-primary" ng-click="login()">I'm in!</md-button>
+        </div>
+    </md-card>
+</md-content>
