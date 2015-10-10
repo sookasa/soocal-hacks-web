@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/sookasa/soocal-hacks-web/issues"
   },
-  "homepage": "https://github.com/sookasa/soocal-hacks-web#readme"
+  "homepage": "https://github.com/sookasa/soocal-hacks-web#readme",
+  "devDependencies": {
+    "gulp-awslambda": "^0.2.2"
+  }
 }
