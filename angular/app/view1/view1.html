@@ -4,11 +4,11 @@
             <md-card-content>
                 <md-input-container flex>
                     <label>Email</label>
-                    <input required type="email" ng-model="user.email" name="userEmail" ng-pattern="/^.+@.+\..+$/">
+                    <input required type="email" ng-model="ctrl.user.email" name="userEmail" ng-pattern="/^.+@.+\..+$/">
                 </md-input-container>
             </md-card-content>
             <div class="md-actions" layout="row" layout-align="center center">
-                <md-button class="md-raised md-primary" ng-click="login()" ng-disabled="!loginForm.$valid">I'm in!
+                <md-button class="md-raised md-primary" ng-click="ctrl.login()" ng-disabled="!loginForm.$valid">I'm in!
                 </md-button>
             </div>
         </form>

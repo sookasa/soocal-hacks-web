@@ -5,13 +5,14 @@ angular.module('myApp.view3', ['ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/view3', {
             templateUrl: 'view3/view3.html',
-            controller: 'View3Ctrl'
+            controller: 'View3Ctrl',
+            controllerAs: 'ctrl'
         });
     }])
 
-    .controller('View3Ctrl', ['$scope', '$location', 'coreService', function ($scope, $location, coreService) {
-        var user = coreService.getUser();
-        if (!user) {
+    .controller('View3Ctrl', ['$location', 'coreService', function ($location, coreService) {
+        this.user = coreService.getUser();
+        if (!this.user) {
             $location.path('/view1');
         }
     }]);
