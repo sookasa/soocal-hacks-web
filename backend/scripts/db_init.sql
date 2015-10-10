@@ -12,6 +12,6 @@ CREATE TABLE votes
   date DATE NOT NULL,
   email TEXT NOT NULL,
   choice_id INT NOT NULL REFERENCES choices (id),
-  "like" BOOL NOT NULL
+  "like" INT NOT NULL
 );
 CREATE UNIQUE INDEX ON votes (date, choice_id, email);

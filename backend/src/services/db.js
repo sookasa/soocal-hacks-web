@@ -29,7 +29,7 @@ function addChoice(date, yelp_id, callback) {
                 var choice = {
                     'id': result.rows[0].id,
                     'date': date,
-                    'yelp_id': yelp_id
+                    'yelpId': yelp_id
                 };
 
                 client.end();
@@ -41,7 +41,7 @@ function addChoice(date, yelp_id, callback) {
 
 function getChoices(date, callback) {
     dbAccess(function(client) {
-        client.query('SELECT date, yelp_id WHERE date=$1', [date], function(err, result) {
+        client.query('SELECT date, yelp_id FROM choices WHERE date=$1', [date], function(err, result) {
             if (handleError(err)) {
                 client.end();
                 callback(err, null);
@@ -51,7 +51,7 @@ function getChoices(date, callback) {
                 for(var row in result.rows) {
                     var choice = {
                         'date': row.date,
-                        'yelp_id': row.yelp_id
+                        'yelpId': row.yelp_id
                     };
                     choices.push(choice);
                 }
@@ -63,6 +63,46 @@ function getChoices(date, callback) {
     });
 }
 
-function addVote(date, email, like, callback) {
+function addVote(date, choiceId, email, like, callback) {
+    dbAccess(function(client) {
+        like = like === true || like !== 0 ? 1: 0;
 
+        client.query('INSERT INTO votes (date, email, choice_id, "like") VALUES ($1, $2, $3, $4) RETURNING id', [date, email, choiceId, like], function(err, result) {
+            if (handleError(err)) {
+                client.end();
+                callback(err, null);
+            } else {
+                var vote = {
+                    'id': result.rows[0].id,
+                    'date': date,
+                    'choiceId': choiceId,
+                    'email': email,
+                    'like': like
+                };
+
+                client.end();
+                callback(null, vote);
+            }
+        });
+    });
+}
+
+function getWinner(date, callback) {
+    dbAccess(function(client) {
+        client.query('SELECT date, choice_id, (SELECT yelp_id FROM choices WHERE choices.id=votes.choice_id) AS "yelp_id", sum("like") AS "likes" FROM votes WHERE date=$1 GROUP BY date, choice_id ORDER BY "likes" DESC LIMIT 1', [date], function(err, result) {
+            if (handleError(err)) {
+                client.end();
+                callback(err, null);
+            } else {
+                var winner = {
+                    'date': result.rows[0].date,
+                    'choiceId': result.rows[0].choice_id,
+                    'yelpId': result.rows[0].yelp_id
+                };
+
+                client.end();
+                callback(null, winner);
+            }
+        });
+    });
 }
