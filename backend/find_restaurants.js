@@ -23,6 +23,7 @@ exports.handler = function(event, context) {
     method: request_data.method,
     headers: oauth.toHeader(oauth.authorize(request_data, token))
   }, function(error, response, body) {
-      context.done(null, body);
+      results = JSON.parse(body)
+      context.done(null, results['businesses']);
   });
 };
