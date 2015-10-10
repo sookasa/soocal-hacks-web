@@ -14,9 +14,9 @@ angular.module('myApp', [
     config(['$routeProvider', '$mdThemingProvider', function ($routeProvider, $mdThemingProvider) {
         $routeProvider.otherwise({redirectTo: '/view1'});
 
-        $mdThemingProvider.theme('default')
-            .primaryPalette('blue')
-            .accentPalette('indigo')
-            .warnPalette('red')
-            .backgroundPalette('grey');
+        //$mdThemingProvider.theme('default')
+        //    .primaryPalette('blue')
+        //    .accentPalette('indigo')
+        //    .warnPalette('red')
+        //    .backgroundPalette('grey');
     }]);

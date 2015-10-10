@@ -12,6 +12,7 @@ angular.module('myApp.view2', ['ngRoute'])
 
     .controller('View2Ctrl', ['$location', 'coreService', function ($location, coreService) {
         this.user = coreService.getUser();
+        console.log(this.user);
         if (!this.user) {
             console.log('wrong virw');
             $location.path('/view1');
