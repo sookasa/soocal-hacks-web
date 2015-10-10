@@ -15,7 +15,7 @@ angular.module('myApp.view2', ['ngRoute'])
             console.log('wrong virw');
             $location.path('/view1');
         }
-        $scope.options = [
+        $scope.choices = [
             {
                 name: 'Pacific Catch',
                 tags: ['asian'],
