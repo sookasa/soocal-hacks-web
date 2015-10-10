@@ -94,11 +94,14 @@ function getWinner(date, callback) {
                 client.end();
                 callback(err, null);
             } else {
-                var winner = {
-                    'date': result.rows[0].date,
-                    'choiceId': result.rows[0].choice_id,
-                    'yelpId': result.rows[0].yelp_id
-                };
+                var winner = undefined;
+                if (result.rows.length > 0) {
+                    winner = {
+                        'date': result.rows[0].date,
+                        'choiceId': result.rows[0].choice_id,
+                        'yelpId': result.rows[0].yelp_id
+                    };
+                }
 
                 client.end();
                 callback(null, winner);
