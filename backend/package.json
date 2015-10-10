@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/sookasa/soocal-hacks-web#readme",
   "devDependencies": {
+    "gulp": "^3.9.0",
     "gulp-awslambda": "^0.2.2",
+    "gulp-concat": "^2.6.0",
     "pg": "^4.4.2",
     "require": "^2.4.20"
   }
