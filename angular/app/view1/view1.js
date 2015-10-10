@@ -13,6 +13,7 @@ angular.module('myApp.view1', ['ngRoute'])
         console.log('controller');
         $scope.user = {};
         $scope.user.email = '';
+        coreService.setUser($scope.user);
         $scope.login = function () {
             console.log( 'email = ' + $scope.user.email);
             coreService.setUser($scope.user);
