@@ -1,3 +1,3 @@
 module.exports = {
-  "operation": "Hello World!"
+  "msg": "Hello World!"
 };
