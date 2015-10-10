@@ -65,6 +65,8 @@ function getChoices(date, callback) {
 
 function addVote(date, choiceId, email, like, callback) {
     dbAccess(function(client) {
+        like = like === true || like !== 0 ? 1: 0;
+
         client.query('INSERT INTO votes (date, email, choice_id, "like") VALUES ($1, $2, $3, $4) RETURNING id', [date, email, choiceId, like], function(err, result) {
             if (handleError(err)) {
                 client.end();
