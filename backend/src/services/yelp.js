@@ -1,4 +1,4 @@
-function get_restaurants(){
+function get_restaurants(callback){
   var request = require('request')
   var OAuth   = require('oauth-1.0a');
   var oauth = OAuth({
@@ -21,9 +21,14 @@ function get_restaurants(){
     method: request_data.method,
     headers: oauth.toHeader(oauth.authorize(request_data, token))
   }, function(error, response, body) {
-    results = JSON.parse(body);
+    var results = JSON.parse(body);
+    results = results['businesses']
+    var restaurants = []
     var choices = get_random_choices();
-    var date = ''
+    for (var i = 0; i < choices.length; i++) {
+      restaurants.push(results[choices[i]]['id'])
+    }
+    callback(null, restaurants);
   });
 };
 
