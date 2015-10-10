@@ -17,27 +17,13 @@ angular.module('myApp.view2', ['ngRoute'])
             console.log('wrong virw');
             $location.path('/view1');
         }
-        this.choices = [
-            {
-                name: 'Pacific Catch',
-                tags: ['asian'],
-                picture: 'https://material.angularjs.org/0.11.2/img/icons/angular-logo.svg',
-                yelp: 'http://www.yelp.com/pacific-catch'
-            },
-            {
-                name: 'Seniores Pizza',
-                tags: ['pizza'],
-                picture: 'https://material.angularjs.org/0.11.2/img/icons/angular-logo.svg',
-                yelp: 'http://www.yelp.com/seniores-pizza'
-            },
-            {
-                name: 'B Street and Vine',
-                tags: ['italian'],
-                picture: 'https://material.angularjs.org/0.11.2/img/icons/angular-logo.svg',
-                yelp: 'http://www.yelp.com/b-street-and-vine'
-            }
-        ];
+        this.choices = coreService.getChoices();
         //console.log('user.email=' + user.email);
         //this.user = coreService.getUser();
+        this.vote = function () {
+            console.log('voting...');
+            coreService.vote(this.choices);
+            $location.path( '/view3' );
+        };
 
     }]);
