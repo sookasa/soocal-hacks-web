@@ -10,17 +10,51 @@ angular.module('myApp.view2', ['ngRoute'])
         });
     }])
 
-    .controller('View2Ctrl', ['$location', 'coreService', function ($location, coreService) {
-        this.user = coreService.getUser();
-        if (!this.user) {
-            $location.path('/view1');
-        }
-        this.choices = coreService.getChoices();
-        //console.log('user.email=' + user.email);
-        //this.user = coreService.getUser();
-        this.vote = function () {
-            coreService.vote(this.choices);
-            $location.path( '/view3' );
-        };
+    .controller('View2Ctrl', ['$location', '$filter', '$mdToast', 'coreService',
+        function ($location, $filter, $mdToast, coreService) {
 
-    }]);
+            this.user = coreService.getUser();
+            if (!this.user) {
+                $location.path('/view1');
+            }
+
+            coreService.receiveChoices().then(
+                function (response) {
+                    this.choices = response.data.choices;
+                }.bind(this),
+                function () {
+                    this.error = true;
+                    var toast = $mdToast.simple()
+                        .content('Something went wrong.')
+                        .action('Dismiss')
+                        .hideDelay(0)
+                        .highlightAction(true);
+                    $mdToast.show(toast).then(function (response) {
+                        $location.path('/view1');
+                    });
+                }.bind(this)
+            );
+
+            this.vote = function () {
+                coreService.sendVote(this.choices).then(
+                    function () {
+                        $mdToast.show($mdToast.simple()
+                            .content('Got it.')
+                            .hideDelay(3000));
+                        $location.path('/view3');
+                    },
+                    function () {
+                        this.error = true;
+                        var toast = $mdToast.simple()
+                            .content('Something went wrong.')
+                            .action('Dismiss')
+                            .hideDelay(0);
+                        $mdToast.show(toast).then(function (response) {
+                            $location.path('/view1');
+                        });
+                    }.bind(this)
+                );
+
+            };
+
+        }]);

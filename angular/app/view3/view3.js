@@ -15,5 +15,17 @@ angular.module('myApp.view3', ['ngRoute'])
         if (!this.user) {
             $location.path('/view1');
         }
-        this.result = coreService.getResult();
+        coreService.receiveResults().then(function (response) {
+            console.log(response);
+            this.result = [response.data.result];
+        }.bind(this), function () {
+            this.error = true;
+            var toast = $mdToast.simple()
+                .content('Something went wrong.')
+                .action('Dismiss')
+                .hideDelay(0);
+            $mdToast.show(toast).then(function (response) {
+                $location.path('/view1');
+            });
+        }.bind(this));
     }]);
