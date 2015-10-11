@@ -27,14 +27,10 @@ function get_restaurants(callback){
     results = results['businesses']
     var restaurants = []
     console.log('Select restaurants...');
-    /*var choices = get_random_choices();
+    var choices = get_random_choices();
     for (var i = 0; i < choices.length; i++) {
-      restaurants.push(results[choices[i]]['id'])
-    }*/
-
-    for (var i = 0; i < 4; i++) {
       restaurants.push({
-        'id': results[i]['id']
+        results[choices[i]]['id']
       })
     }
 
@@ -47,7 +43,7 @@ function get_random_choices() {
   var total_choices = 20;
   var results = Array.apply(null, {length: total_choices}).map(Number.call, Number);
   for (var i = 0; i < results.length; i++) {
-    choice = Math.floor(Math.random() * total_choices) + i
+    choice = Math.floor(Math.random() * (total_choices - i)) + i
     var temp = results[i];
     results[i] = results[choice];
     results[choice] = temp;
