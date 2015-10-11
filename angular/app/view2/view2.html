@@ -1,3 +1,26 @@
-<md-card layout-align="center center">
-        Hi {{user.email}}!
+<md-content layout="row" flex class="md-padding" layout-align="center center">
+    <md-card flex="50" layout-align="center center">
+        <h3>Hi {{ctrl.user.email}}!</h3>
+        <div ng-if="!ctrl.choices && !ctrl.error">
+            <div layout="row" layout-sm="column" layout-align="space-around">
+                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            </div>
+        </div>
+        <md-list ng-if="ctrl.choices">
+            <md-list-item flex="10" ng-repeat="item in ctrl.choices">
+                <img ng-src="{{item.picture}}" class="md-avatar" alt="{{item.name}}"/>
+
+                <div class="md-list-item-text" flex="80" layout="column">
+                    <h3>{{ item.name }}</h3>
+                    <md-chips ng-model="item.tags" readonly="true">
+                    </md-chips>
+                    <p>{{ item.yelp }}</p>
+                </div>
+                <md-checkbox flex="10" class="md-secondary" ng-model="item.choice"></md-checkbox>
+            </md-list-item>
+        </md-list>
+        <div class="md-actions" layout="row" layout-align="center center">
+            <md-button class="md-raised md-primary" ng-click="ctrl.vote()" ng-disabled="!ctrl.choices">vote</md-button>
+        </div>
     </md-card>
+</md-content>

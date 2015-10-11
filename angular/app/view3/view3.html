@@ -1,5 +1,25 @@
-<p>This is the partial for view 3.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<md-content layout="row" flex class="md-padding" layout-align="center center">
+    <md-card flex="50" layout-align="center center">
+        <h3>Bon appetite {{ctrl.user.email}}!</h3>
+
+        <div ng-if="!ctrl.result">
+            <div ng-if="!ctrl.result && !ctrl.error">
+                <div layout="row" layout-sm="column" layout-align="space-around">
+                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
+            </div>
+        </div>
+        <md-list ng-if="ctrl.result">
+            <md-list-item ng-repeat="item in ctrl.result">
+                <img ng-src="{{item.picture}}" class="md-avatar" alt="{{item.name}}"/>
+
+                <div class="md-list-item-text" layout="column">
+                    <h3>{{ item.name }}</h3>
+                    <md-chips ng-model="item.tags" readonly="true">
+                    </md-chips>
+                    <p>{{ item.yelp }}</p>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-card>
+</md-content>
