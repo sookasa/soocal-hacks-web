@@ -30,7 +30,7 @@ function get_restaurants(callback){
     var choices = get_random_choices();
     for (var i = 0; i < choices.length; i++) {
       restaurants.push({
-        results[choices[i]]['id']
+        'id': results[choices[i]]['id']
       })
     }
 
