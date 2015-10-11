@@ -68,12 +68,17 @@ function get_restaurant_info(id, callback) {
     headers: oauth.toHeader(oauth.authorize(request_data, token))
   }, function(error, response, body) {
     var result = JSON.parse(body);
+    var categories_json = result['categories']
+    var categories = []
+    for (var i = 0; i < categories_json.length; i++) {
+      categories.push(categories_json[i][0])
+    }
     var response = {
       'id' : result['id'],
       'name' : result['name'],
       'img' : result['image_url'],
       'url' : result['url'],
-      'tags' : result['categories']
+      'tags' : categories
     }
     callback(response)
   });
