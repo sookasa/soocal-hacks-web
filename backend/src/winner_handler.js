@@ -12,13 +12,17 @@ exports.winner_handler = function(event, context) {
         };
 
         if (winner !== undefined) {
-            response.result = {
-                'id': winner.choiceId,
-                'yelpId': winner.yelpId
-                // TODO: get yelp info and create response
-            };
-        }
+            get_restaurant_info(winner.yelpId, function(err, yelpInfo){
+                response.result = {
+                    'id': winner.choiceId,
+                    'name': yelpInfo.name,
+                    'picture': yelpInfo.picture,
+                    'tags': yelpInfo.tags,
+                    'yelp': yelpInfo.url
+                };
 
-        context.done(null,  response);
+                context.done(null,  response);
+            });
+        }
     });
 };

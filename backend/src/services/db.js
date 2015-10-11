@@ -41,7 +41,7 @@ function addChoice(date, yelp_id, callback) {
 
 function getChoices(date, callback) {
     dbAccess(function(client) {
-        client.query('SELECT date, yelp_id FROM choices WHERE date=$1', [date], function(err, result) {
+        client.query('SELECT id, date, yelp_id FROM choices WHERE date=$1', [date], function(err, result) {
             if (handleError(err)) {
                 client.end();
                 callback(err, null);
@@ -50,6 +50,7 @@ function getChoices(date, callback) {
                 for(var i=0; i<result.rows.length; i++) {
                     var row = result.rows[i];
                     var choice = {
+                        'id': row.id,
                         'date': row.date,
                         'yelpId': row.yelp_id
                     };
