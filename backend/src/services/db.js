@@ -1,7 +1,9 @@
 var pg = require('pg');
-var conString = "postgres://lunchify:lunchify@localhost/lunchify";
+//var conString = "postgres://lunchify:lunchify@localhost/lunchify";
+var conString = 'postgres://sookasa:sookasa2011@soocal-hacks.cgwunx2nr1t8.us-east-1.rds.amazonaws.com:5432/lunchify';
 
 function dbAccess(fn) {
+    console.log('Connect to DB...');
     var client = new pg.Client(conString);
     client.connect(function(err) {
         if (err) {
@@ -21,7 +23,9 @@ function handleError(err) {
 
 function addChoice(date, yelp_id, callback) {
     dbAccess(function(client) {
+        console.log('Start query...');
         client.query('INSERT INTO choices (date, yelp_id) VALUES ($1, $2) RETURNING id', [date, yelp_id], function(err, result) {
+            console.log('Got query result :)');
             if (handleError(err)) {
                 client.end();
                 callback(err, null);

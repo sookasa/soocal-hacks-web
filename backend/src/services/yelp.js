@@ -1,4 +1,5 @@
 function get_restaurants(callback){
+  console.log('Get restaurants from Yelp...');
   var request = require('request')
   var OAuth   = require('oauth-1.0a');
   var oauth = OAuth({
@@ -13,7 +14,7 @@ function get_restaurants(callback){
     secret: 'WIY2ti50EgzqnlUsyEXze-6VD-Y'
   };
   var request_data = {
-    url: 'https://api.yelp.com/v2/search/?term=Restaurants&sort=2&location=906 S Claremont St, San Mateo, CA&limit=50&radius_filter=1500',
+    url: 'https://api.yelp.com/v2/search/?term=Restaurants&sort=2&location=906 S Claremont St, San Mateo, CA&limit=20&radius_filter=1500',
     method: 'GET'
   };
   request({
@@ -21,19 +22,29 @@ function get_restaurants(callback){
     method: request_data.method,
     headers: oauth.toHeader(oauth.authorize(request_data, token))
   }, function(error, response, body) {
+    console.log('Get restaurants. Done.');
     var results = JSON.parse(body);
     results = results['businesses']
     var restaurants = []
-    var choices = get_random_choices();
+    console.log('Select restaurants...');
+    /*var choices = get_random_choices();
     for (var i = 0; i < choices.length; i++) {
       restaurants.push(results[choices[i]]['id'])
+    }*/
+
+    for (var i = 0; i < 4; i++) {
+      restaurants.push({
+        'id': results[i]['id']
+      })
     }
+
+    console.log('Select restaurants. Done.');
     callback(null, restaurants);
   });
 };
 
 function get_random_choices() {
-  var total_choices = 50;
+  var total_choices = 20;
   var results = Array.apply(null, {length: total_choices}).map(Number.call, Number);
   for (var i = 0; i < results.length; i++) {
     choice = Math.floor(Math.random() * total_choices) + i

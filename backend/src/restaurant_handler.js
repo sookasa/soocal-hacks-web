@@ -14,7 +14,9 @@ exports.restaurant_handler = function(event, context) {
     get_restaurants(function(err, restaurants) {
       async.map(restaurants,
           function(restaurant, callback) {
+              console.log('Add choice to DB. Yelp Id: ' + restaurant.id);
               addChoice(date, restaurant.id, function(err, choice) {
+                  console.log('Added.');
                   callback(err, choice);
               });
           },
