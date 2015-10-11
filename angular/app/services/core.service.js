@@ -1,8 +1,6 @@
 angular.module('myApp.services', []).
     factory('coreService', function ($http) {
 
-        //var api = {};
-        console.log('service');
         var initChoices = function () {
             // get choices from server api
             var choices = [
@@ -34,10 +32,8 @@ angular.module('myApp.services', []).
             return choices;
         };
         var choices = initChoices();
-        console.log('choices = ' + choices);
 
         var submitVote = function (myChoices) {
-            console.log(myChoices);
         };
 
         var getResultFromServer = function () {
@@ -80,5 +76,4 @@ angular.module('myApp.services', []).
             }
         }
 
-        //return api;
     });

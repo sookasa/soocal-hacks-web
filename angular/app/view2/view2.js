@@ -12,16 +12,13 @@ angular.module('myApp.view2', ['ngRoute'])
 
     .controller('View2Ctrl', ['$location', 'coreService', function ($location, coreService) {
         this.user = coreService.getUser();
-        console.log(this.user);
         if (!this.user) {
-            console.log('wrong virw');
             $location.path('/view1');
         }
         this.choices = coreService.getChoices();
         //console.log('user.email=' + user.email);
         //this.user = coreService.getUser();
         this.vote = function () {
-            console.log('voting...');
             coreService.vote(this.choices);
             $location.path( '/view3' );
         };

@@ -11,12 +11,9 @@ angular.module('myApp.view1', ['ngRoute'])
     }])
 
     .controller('View1Ctrl', ['$location', 'coreService', function ($location, coreService) {
-        console.log('controller');
         this.user = {};
-        //this.user.email = '';
         coreService.setUser(this.user);
         this.login = function () {
-            console.log( 'email = ' + this.user);
             coreService.setUser(this.user);
             $location.path( '/view2' );
         };
