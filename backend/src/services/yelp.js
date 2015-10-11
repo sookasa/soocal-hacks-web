@@ -76,11 +76,11 @@ function get_restaurant_info(id, callback) {
     var response = {
       'id' : result['id'],
       'name' : result['name'],
-      'img' : result['image_url'],
+      'picture' : result['image_url'],
       'url' : result['url'],
       'tags' : categories
     }
-    callback(response)
+    callback(null, response)
   });
 
 }
