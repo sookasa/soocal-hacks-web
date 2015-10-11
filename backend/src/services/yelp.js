@@ -1,4 +1,4 @@
-function get_restaurants(){
+function get_restaurants(callback){
   var request = require('request')
   var OAuth   = require('oauth-1.0a');
   var oauth = OAuth({
@@ -21,9 +21,14 @@ function get_restaurants(){
     method: request_data.method,
     headers: oauth.toHeader(oauth.authorize(request_data, token))
   }, function(error, response, body) {
-    results = JSON.parse(body);
+    var results = JSON.parse(body);
+    results = results['businesses']
+    var restaurants = []
     var choices = get_random_choices();
-    var date = ''
+    for (var i = 0; i < choices.length; i++) {
+      restaurants.push(results[choices[i]]['id'])
+    }
+    callback(null, restaurants);
   });
 };
 
@@ -37,4 +42,40 @@ function get_random_choices() {
     results[choice] = temp;
   }
   return results.slice(0, 4);
+}
+
+function get_restaurant_info(id, callback) {
+  var request = require('request')
+  var OAuth   = require('oauth-1.0a');
+  var oauth = OAuth({
+      consumer: {
+          public: 'C-p_NdWQjNz4bz2MSEdFcA',
+          secret: 'XpkT-QL5nYDVbiJnk5nfOhNcQHM'
+      },
+      signature_method: 'HMAC-SHA1'
+  });
+  var token = {
+    public: 'y7MLnPCL1ayG2YOUZ6L72y4Nh3SMzscm',
+    secret: 'WIY2ti50EgzqnlUsyEXze-6VD-Y'
+  };
+  var request_data = {
+    url: 'https://api.yelp.com/v2/business/' + id,
+    method: 'GET'
+  };
+  request({
+    url: request_data.url,
+    method: request_data.method,
+    headers: oauth.toHeader(oauth.authorize(request_data, token))
+  }, function(error, response, body) {
+    var result = JSON.parse(body);
+    var response = {
+      'id' : result['id'],
+      'name' : result['name'],
+      'img' : result['image_url'],
+      'url' : result['url'],
+      'tags' : result['categories']
+    }
+    callback(response)
+  });
+
 }
