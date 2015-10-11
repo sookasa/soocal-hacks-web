@@ -9,7 +9,7 @@ angular.module('myApp.services', []).
                 {
                     id: 0,
                     name: 'Pacific Catch',
-                    tags: ['asian', 'asian', 'asian', 'asian', 'asian', 'asian'],
+                    tags: ['asian', 'asi1an', 'asi1adn', 'asi5asan', 'asi5an', 'asi6an'],
                     picture: 'https://material.angularjs.org/0.11.2/img/icons/angular-logo.svg',
                     yelp: 'http://www.yelp.com/pacific-catch'
                 },
