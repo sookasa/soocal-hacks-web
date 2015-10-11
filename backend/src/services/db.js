@@ -47,8 +47,8 @@ function getChoices(date, callback) {
                 callback(err, null);
             } else {
                 var choices = [];
-
-                for(var row in result.rows) {
+                for(var i=0; i<result.rows.length; i++) {
+                    var row = result.rows[i];
                     var choice = {
                         'date': row.date,
                         'yelpId': row.yelp_id
