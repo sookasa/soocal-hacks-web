@@ -3,7 +3,8 @@ var async = require('async');
 exports.votes_handler = function(event, context) {
     console.log('Votes Handler - Received Event:', JSON.stringify(event, null, 2));
 
-    var date = event.date;
+    var date = event.date !== undefined ? new Date(event.date): new Date();
+    date.setHours(0,0,0,0);
     var email = event.email;
     var vote_choices = event.choices;
 
